@@ -10,7 +10,7 @@ const Layouts = ({ title, children }) => {
     <>
       <NavbarComponent />
       <SidebarComponent />
-      <div className="p-4 sm:ml-64">
+      <div>
         <main>{children}</main>
       </div>
     </>
