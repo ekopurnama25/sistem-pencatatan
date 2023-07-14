@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 const NavbarComponent = () => {
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [sidebarOpen, setSidebar] = useState(false);
+
+  const ToggleSidebar = () => {
+    sidebarOpen === true ? setSidebar(false) : setSidebar(true);
+  };
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -9,7 +13,7 @@ const NavbarComponent = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start">
               <button
-                onClick={() => setNavbarOpen(!navbarOpen)}
+                onClick={ToggleSidebar}
                 data-drawer-target="logo-sidebar"
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
