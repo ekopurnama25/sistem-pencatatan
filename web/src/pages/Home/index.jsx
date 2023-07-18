@@ -5,7 +5,11 @@ const HomePages = () => {
   return (
     <>
       <Layouts title="Home">
-        <div className="flex w-max gap-4">Hai</div>
+        <div className="p-4 sm:ml-64 bg-gray-200">
+          <div className="p-4  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+            HAU
+          </div>
+        </div>
       </Layouts>
     </>
   );

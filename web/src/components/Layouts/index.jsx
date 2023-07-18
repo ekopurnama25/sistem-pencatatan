@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import NavbarComponent from "../Navbar";
 import SidebarComponent from "../Sidebar";
+import "./layout.css";
 
 const Layouts = ({ title, children }) => {
   useEffect(() => {
@@ -9,8 +10,10 @@ const Layouts = ({ title, children }) => {
   return (
     <>
       <NavbarComponent />
+
       <SidebarComponent />
-      <div>
+
+      <div className="main-body">
         <main>{children}</main>
       </div>
     </>
