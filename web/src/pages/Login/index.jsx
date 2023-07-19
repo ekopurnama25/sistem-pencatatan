@@ -10,7 +10,7 @@ import { Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 
 const LoginPages = () => {
-  const { isAuthenticated, login, logout } = useContext(AuthContext);
+  const { isAuthenticated, login } = useContext(AuthContext);
 
   return (
     <>

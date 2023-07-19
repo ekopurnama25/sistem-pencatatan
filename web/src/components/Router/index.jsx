@@ -1,15 +1,18 @@
 import HomePages from "../../pages/Home";
 import IncomePages from "../../pages/Income";
 import LoginPages from "../../pages/Login";
-import PrivateRoute from "../../utils/PrivateRoutes";
-import { Role } from "../../utils/Roles";
+import CheckUSersRouter from "../../utils/CheckUSersRouter";
+import PrivateRoute from "../../utils/PrivateRoute";
+import { Roles } from "../../utils/Roles";
 
 const routes = [
   {
     path: "/",
     element: (
-      <PrivateRoute allowRoles={[Role.Admin]}>
-        <HomePages />
+      <PrivateRoute allowRoles={[Roles.Admin]}>
+        <CheckUSersRouter>
+          <HomePages />
+        </CheckUSersRouter>
       </PrivateRoute>
     ),
   },
