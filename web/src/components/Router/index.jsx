@@ -1,7 +1,7 @@
 import HomePages from "../../pages/Home";
 import IncomePages from "../../pages/Income";
 import LoginPages from "../../pages/Login";
-import CheckUSersRouter from "../../utils/CheckUSersRouter";
+import CheckUsersRouter from "../../utils/CheckUsersRouter";
 import PrivateRoute from "../../utils/PrivateRoute";
 import { Roles } from "../../utils/Roles";
 
@@ -10,9 +10,9 @@ const routes = [
     path: "/",
     element: (
       <PrivateRoute allowRoles={[Roles.Admin]}>
-        <CheckUSersRouter>
+        <CheckUsersRouter>
           <HomePages />
-        </CheckUSersRouter>
+        </CheckUsersRouter>
       </PrivateRoute>
     ),
   },

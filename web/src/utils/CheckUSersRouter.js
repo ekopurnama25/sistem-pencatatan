@@ -1,27 +1,21 @@
 import { useEffect, useState } from "react";
 //import { CheckUsers } from "../service/auth";
 import { useContext } from "react";
-import CheckUSersContext from "../context/UsersContext";
+import CheckUsersContext from "../context/UsersContext";
 
 import AuthContext from "../context/AuthContext";
 
-const CheckUSersRouter = ({ children }) => {
+const CheckUsersRouter = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
   const { checkToken, checkUsers, setCheckUsers } =
-    useContext(CheckUSersContext);
+    useContext(CheckUsersContext);
   //const [checkUsers, setCheckUsers] = useState();
   console.log(checkUsers);
   useEffect(() => {
-    const CHECK = () => {
-      checkToken(isAuthenticated?.accsesToken);
-      //setCheckUsers(usersToken);
-    };
-
-    //setCheckUsers(CHECK);
-    CHECK();
+    checkToken(isAuthenticated?.accsesToken);
   }, []);
 
   return children;
 };
 
-export default CheckUSersRouter;
+export default CheckUsersRouter;

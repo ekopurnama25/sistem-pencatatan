@@ -9,8 +9,8 @@ const setupInterceptors = () => {
         ? JSON.parse(localStorage.getItem("Token"))
         : null;
       if (users) {
-        console.log(users?.accsesToken);
-        config.headers["Authorization"] = `Bearer ${users?.accsesToken}`;
+        //console.log(users?.accsesToken);
+        config.headers["Authorization"] = "Bearer " + users?.accsesToken;
       }
       return config;
     },
@@ -28,11 +28,11 @@ const setupInterceptors = () => {
         ? JSON.parse(localStorage.getItem("Token"))
         : null;
 
-      const status = err.response ? error.response.status : null;
+      const status = err.response ? err.response.status : null;
       const originalRequest = err.config;
 
-      if (status === 401 && !originalConfig._retry) {
-        originalConfig._retry = true;
+      if (status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
 
         try {
           const response = await axiosInstance.post("/auth/refresh_token", {

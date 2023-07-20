@@ -1,33 +1,34 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import axiosInstance from "../utils/ApiConfig";
 
-const CheckUSersContext = createContext({});
+const CheckUsersContext = createContext({});
 
-export const CheckUSersProvider = ({ children }) => {
+export const CheckUsersProvider = ({ children }) => {
   const [checkUsers, setCheckUsers] = useState([]);
-  console.log(checkUsers);
+
   const checkToken = async (data) => {
     try {
-      const req = await axiosInstance.post("/auth/home/", data);
-      console.log(req.data, "useer");
-      setCheckUsers(req.data);
-      //return req.data;
+      console.log(data);
+      const Token = await axiosInstance.post("/auth/home/", data);
+      console.log(Token);
+      setCheckUsers(Token);
+      return Token;
     } catch (error) {
       console.log(error);
     }
   };
 
-  let contextData = {
+  let contextDataUsers = {
     checkUsers: checkUsers,
     setCheckUsers: setCheckUsers,
     checkToken,
   };
 
   return (
-    <CheckUSersContext.Provider value={contextData}>
+    <CheckUsersContext.Provider value={contextDataUsers}>
       {children}
-    </CheckUSersContext.Provider>
+    </CheckUsersContext.Provider>
   );
 };
 
-export default CheckUSersContext;
+export default CheckUsersContext;
