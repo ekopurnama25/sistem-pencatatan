@@ -14,8 +14,11 @@ app.use(cors());
 const usersRoute = require("./router/users.route");
 const authRoute = require("./router/auth.route");
 
+const incomeRoute = require("./router/income.route");
+
 app.use("/v2/users", usersRoute);
 app.use("/v2/auth", authRoute);
+app.use("/v2/income", incomeRoute);
 
 app.use("/file", express.static("file"));
 

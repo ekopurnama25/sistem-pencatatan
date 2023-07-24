@@ -1,78 +1,48 @@
-import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import React, { useContext, useEffect } from "react";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   CardHeader,
   Typography,
   Button,
   CardBody,
-  Chip,
   CardFooter,
-  Avatar,
   IconButton,
-  Tooltip,
-  Input,
 } from "@material-tailwind/react";
+import IncomeContext from "../../context/IncomeContext";
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+const TABLE_HEAD = [
+  "No",
+  "Tanggal",
+  "Keterangan Pemasukan",
+  "Sumber Pendapatan",
+  "Jumlah Pemasukan",
+  "Action",
+];
 
 const TABLE_ROWS = [
   {
-    img: "/img/logos/logo-spotify.svg",
-    name: "Spotify",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-amazon.svg",
-    name: "Amazon",
-    amount: "$5,000",
-    date: "Wed 1:00pm",
-    status: "paid",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-pinterest.svg",
-    name: "Pinterest",
-    amount: "$3,400",
-    date: "Mon 7:40pm",
-    status: "pending",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-google.svg",
-    name: "Google",
-    amount: "$1,000",
-    date: "Wed 5:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
-  },
-  {
-    img: "/img/logos/logo-netflix.svg",
-    name: "netflix",
-    amount: "$14,000",
-    date: "Wed 3:30am",
-    status: "cancelled",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    no: "1",
+    income_statement: "Spotify",
+    source_of_income: "$2,500",
+    date_of_entry: "Wed 3:00pm",
+    income_amount: "paid",
   },
 ];
 
 export default function TableIncome() {
+  const { income, getAllIncome } = useContext(IncomeContext);
+
+  useEffect(() => {
+    const getIncome = async () => {
+      await getAllIncome();
+      //setIncome(GETALLINCOME);
+    };
+
+    getIncome();
+  }, []);
+
+  console.log(income);
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -87,8 +57,7 @@ export default function TableIncome() {
           </div>
           <div className="flex w-full shrink-0 gap-2 md:w-max">
             <Button className="flex items-center gap-3" color="blue" size="sm">
-              <ArrowDownTrayIcon strokeWidth={2} className="h-4 w-4" /> Add
-              Income
+              Add Income
             </Button>
           </div>
         </div>
@@ -114,51 +83,22 @@ export default function TableIncome() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(
-              (
-                {
-                  img,
-                  name,
-                  amount,
-                  date,
-                  status,
-                  account,
-                  accountNumber,
-                  expiry,
-                },
-                index
-              ) => {
-                const isLast = index === TABLE_ROWS.length - 1;
+            {income &&
+              income?.data?.data?.map((Income, index) => {
+                const isLast = index + 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Avatar
-                          src={img}
-                          alt={name}
-                          size="md"
-                          className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                        />
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-bold"
-                        >
-                          {name}
-                        </Typography>
-                      </div>
-                    </td>
+                  <tr key={index}>
                     <td className={classes}>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {amount}
+                        {isLast}
                       </Typography>
                     </td>
                     <td className={classes}>
@@ -167,103 +107,54 @@ export default function TableIncome() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {date}
+                        {Income?.date_of_entry}
                       </Typography>
                     </td>
                     <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          size="sm"
-                          variant="ghost"
-                          value={status}
-                          color={
-                            status === "paid"
-                              ? "green"
-                              : status === "pending"
-                              ? "amber"
-                              : "red"
-                          }
-                        />
-                      </div>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {Income?.income_statement}
+                      </Typography>
                     </td>
                     <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
-                          <Avatar
-                            src={
-                              account === "visa"
-                                ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
-                                : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
-                            }
-                            size="sm"
-                            alt={account}
-                            variant="square"
-                            className="h-full w-full object-contain p-1"
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal capitalize"
-                          >
-                            {account.split("-").join(" ")} {accountNumber}
-                          </Typography>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            {expiry}
-                          </Typography>
-                        </div>
-                      </div>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {Income?.source_of_income}
+                      </Typography>
                     </td>
                     <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text" color="blue-gray">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {Income?.income_amount}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        <Button size="md">Edit</Button>{" "}
+                        <Button size="md" color="red">
+                          Delete
+                        </Button>
+                      </Typography>
                     </td>
                   </tr>
                 );
-              }
-            )}
+              })}
           </tbody>
         </table>
       </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-        <Button variant="outlined" color="blue-gray" size="sm">
-          Previous
-        </Button>
-        <div className="flex items-center gap-2">
-          <IconButton variant="outlined" color="blue-gray" size="sm">
-            1
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            2
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            3
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            ...
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            8
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            9
-          </IconButton>
-          <IconButton variant="text" color="blue-gray" size="sm">
-            10
-          </IconButton>
-        </div>
-        <Button variant="outlined" color="blue-gray" size="sm">
-          Next
-        </Button>
-      </CardFooter>
     </Card>
   );
 }

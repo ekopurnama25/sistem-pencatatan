@@ -39,9 +39,9 @@ const setupInterceptors = () => {
             refreshToken: users?.refreshToken,
           });
           if (response.status === 200) {
-            localStorage.setItem("userToken", JSON.stringify(response.data));
-            let users = localStorage.getItem("userToken")
-              ? JSON.parse(localStorage.getItem("userToken"))
+            localStorage.setItem("Token", JSON.stringify(response.data));
+            let users = localStorage.getItem("Token")
+              ? JSON.parse(localStorage.getItem("Token"))
               : null;
             // console.log(users);
             axiosInstance.defaults.headers.common["Authorization"] =

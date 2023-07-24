@@ -73,7 +73,7 @@ export default function NavbarComponents() {
               href="#"
               className="mr-4 cursor-pointer py-1.5 font-medium"
             >
-              SI-PAN-XI
+              SISTEM PENCATATAN KAS
             </Typography>
             <div className="flex items-center gap-4">
               <Avatar

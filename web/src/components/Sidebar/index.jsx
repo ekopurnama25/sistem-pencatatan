@@ -33,11 +33,6 @@ export default function SidebarComponent() {
       className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
       aria-label="Sidebar"
     >
-      <div className="mb-2 p-4">
-        <Typography variant="h5" color="blue-gray">
-          Sidebar
-        </Typography>
-      </div>
       <List>
         <ListItem>
           <ListItemPrefix>
@@ -56,7 +51,7 @@ export default function SidebarComponent() {
               />
             </svg>
           </ListItemPrefix>
-          Dashboard
+          <Link to="/">Dashboard</Link>
         </ListItem>
         <Accordion
           open={open === 1}
@@ -107,7 +102,7 @@ export default function SidebarComponent() {
                 <ListItemPrefix>
                   <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                 </ListItemPrefix>
-                Pengeluaran
+                <Link to="/expenditure">Expenditure</Link>
               </ListItem>
             </List>
           </AccordionBody>

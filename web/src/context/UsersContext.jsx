@@ -9,7 +9,9 @@ export const CheckUsersProvider = ({ children }) => {
   const checkToken = async (data) => {
     try {
       console.log(data);
-      const Token = await axiosInstance.post("/auth/home/", data);
+      const Token = await axiosInstance.post("/auth/home/", {
+        accsesToken: data,
+      });
       console.log(Token);
       setCheckUsers(Token);
       return Token;
