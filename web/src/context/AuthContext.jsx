@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  console.log(isAuthenticated, "auth ini");
+  //console.log(isAuthenticated, "auth ini");
   const login = async (modal) => {
     try {
       const req = await axiosInstance.post("/auth/", {
         email: modal.email,
         password: modal.password,
       });
-      console.log(req.data);
+      //console.log(req.data);
       localStorage.setItem("Token", JSON.stringify(req.data));
       setAuthenticated(req.data);
     } catch (error) {

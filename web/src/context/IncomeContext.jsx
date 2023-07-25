@@ -9,9 +9,23 @@ export const IncomeProvider = ({ children }) => {
   const getAllIncome = async () => {
     try {
       const Income = await axiosInstance.get("/income/");
-      console.log(Income);
+      //console.log(Income);
       setIncome(Income);
       return Income;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const AddIncome = async (income) => {
+    try {
+      const incomeCreate = await axiosInstance.post("/income/", {
+        date_of_entry: income.date_of_entry,
+        income_statement: income.income_statement,
+        source_of_income: income.source_of_income,
+        income_amount: income.income_amount,
+      });
+      return incomeCreate;
     } catch (error) {
       console.log(error);
     }
@@ -21,6 +35,7 @@ export const IncomeProvider = ({ children }) => {
     income: income,
     setIncome: setIncome,
     getAllIncome,
+    AddIncome,
   };
 
   return (

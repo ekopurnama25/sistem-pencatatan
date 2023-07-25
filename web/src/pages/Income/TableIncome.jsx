@@ -10,6 +10,7 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import IncomeContext from "../../context/IncomeContext";
+import { useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = [
   "No",
@@ -31,6 +32,7 @@ const TABLE_ROWS = [
 ];
 
 export default function TableIncome() {
+  let navigate = useNavigate();
   const { income, getAllIncome } = useContext(IncomeContext);
 
   useEffect(() => {
@@ -42,7 +44,9 @@ export default function TableIncome() {
     getIncome();
   }, []);
 
-  console.log(income);
+  const Add_Income_Form = () => {
+    return navigate("/addIncome");
+  };
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -56,7 +60,12 @@ export default function TableIncome() {
             </Typography>
           </div>
           <div className="flex w-full shrink-0 gap-2 md:w-max">
-            <Button className="flex items-center gap-3" color="blue" size="sm">
+            <Button
+              onClick={Add_Income_Form}
+              className="flex items-center gap-3"
+              color="blue"
+              size="sm"
+            >
               Add Income
             </Button>
           </div>

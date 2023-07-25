@@ -10,7 +10,7 @@ const CheckUsersRouter = ({ children }) => {
   const { checkToken, checkUsers, setCheckUsers } =
     useContext(CheckUsersContext);
   //const [checkUsers, setCheckUsers] = useState();
-  console.log(checkUsers);
+  //console.log(checkUsers);
   useEffect(() => {
     checkToken(isAuthenticated?.accsesToken);
   }, []);
