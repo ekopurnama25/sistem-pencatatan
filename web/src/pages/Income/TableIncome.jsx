@@ -21,19 +21,9 @@ const TABLE_HEAD = [
   "Action",
 ];
 
-const TABLE_ROWS = [
-  {
-    no: "1",
-    income_statement: "Spotify",
-    source_of_income: "$2,500",
-    date_of_entry: "Wed 3:00pm",
-    income_amount: "paid",
-  },
-];
-
 export default function TableIncome() {
   let navigate = useNavigate();
-  const { income, getAllIncome } = useContext(IncomeContext);
+  const { income, getAllIncome, DeleteIncome } = useContext(IncomeContext);
 
   useEffect(() => {
     const getIncome = async () => {
@@ -47,6 +37,15 @@ export default function TableIncome() {
   const Add_Income_Form = () => {
     return navigate("/addIncome");
   };
+
+  const Delete_Income = async (id) => {
+    await DeleteIncome(id);
+  };
+
+  const GetIDIncome = async (id) => {
+    return navigate(`/updateincome/${id}`);
+  };
+
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -100,7 +99,7 @@ export default function TableIncome() {
                   : "p-4 border-b border-blue-gray-50";
 
                 return (
-                  <tr key={index}>
+                  <tr key={Income?.id_income}>
                     <td className={classes}>
                       <Typography
                         variant="small"
@@ -152,8 +151,21 @@ export default function TableIncome() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        <Button size="md">Edit</Button>{" "}
-                        <Button size="md" color="red">
+                        <Button
+                          size="md"
+                          onClick={() => {
+                            GetIDIncome(Income?.id_income);
+                          }}
+                        >
+                          Edit
+                        </Button>{" "}
+                        <Button
+                          size="md"
+                          color="red"
+                          onClick={() => {
+                            Delete_Income(Income?.id_income);
+                          }}
+                        >
                           Delete
                         </Button>
                       </Typography>

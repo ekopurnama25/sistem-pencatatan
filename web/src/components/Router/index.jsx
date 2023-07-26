@@ -2,6 +2,7 @@ import ExpenditurePages from "../../pages/Expenditure";
 import HomePages from "../../pages/Home";
 import IncomePages from "../../pages/Income";
 import AddIncomePages from "../../pages/Income/AddIncome";
+import EditIncomePages from "../../pages/Income/EditIncome";
 import LoginPages from "../../pages/Login";
 import CheckUsersRouter from "../../utils/CheckUSersRouter";
 import PrivateRoute from "../../utils/PrivateRoute";
@@ -48,6 +49,16 @@ const routes = [
       <PrivateRoute allowRoles={[Roles.Admin]}>
         <CheckUsersRouter>
           <ExpenditurePages />
+        </CheckUsersRouter>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/updateincome/:id",
+    element: (
+      <PrivateRoute allowRoles={[Roles.Admin]}>
+        <CheckUsersRouter>
+          <EditIncomePages />
         </CheckUsersRouter>
       </PrivateRoute>
     ),

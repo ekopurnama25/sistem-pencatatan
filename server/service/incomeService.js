@@ -10,6 +10,29 @@ exports.getIncome = async (req, res) => {
   }
 };
 
+exports.getIdIncome = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const checkID = await Income.findOne({
+      where: { id_income: id },
+    });
+    console.log(id);
+    if (checkID) {
+      res.status(200).json({
+        status: true,
+        income: checkID,
+      });
+    } else {
+      res.status(404).json({
+        status: false,
+        message: "Id Income yang anda cari tidak ada",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 exports.postIncome = async (req, res) => {
   try {
     const income = {
@@ -34,19 +57,19 @@ exports.postIncome = async (req, res) => {
   }
 };
 
-// exports.deleteIncome = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     await User.destroy({
-//       where: { id_users: id },
-//     });
-//     res
-//       .status(200)
-//       .json({ status: 200, message: "success delete data, " + id });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+exports.deleteIncome = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Income.destroy({
+      where: { id_income: id },
+    });
+    res
+      .status(200)
+      .json({ status: 200, message: "success delete data, " + id });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // exports.updateIncome = async (req, res) => {
 //   try {
