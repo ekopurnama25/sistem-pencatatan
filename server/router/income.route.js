@@ -12,4 +12,6 @@ router.delete("/:id", authorization.verify, incomeService.deleteIncome);
 
 router.get("/:id", authorization.verify, incomeService.getIdIncome);
 
+router.put("/:id", authorization.verify, incomeService.updateIncome);
+
 module.exports = router;

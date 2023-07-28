@@ -71,22 +71,22 @@ exports.deleteIncome = async (req, res) => {
   }
 };
 
-// exports.updateIncome = async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const users = {
-//       username: req.body.username,
-//       email: req.body.email,
-//       password: await argon2.hash(req.body.password),
-//     };
-//     await User.update(users, {
-//       where: { id_users: id },
-//     });
-//     console.log(users);
-//     res
-//       .status(200)
-//       .json({ status: 200, message: "Users was updated successfully" });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+exports.updateIncome = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const income = {
+      income_statement: req.body.income_statement,
+      source_of_income: req.body.source_of_income,
+      date_of_entry: req.body.date_of_entry,
+      income_amount: req.body.income_amount,
+    };
+    await Income.update(income, {
+      where: { id_income: id },
+    });
+    res
+      .status(200)
+      .json({ status: 200, message: "Users was updated successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};

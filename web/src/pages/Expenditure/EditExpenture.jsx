@@ -11,30 +11,29 @@ import { useParams } from "react-router-dom";
 import { Formik } from "formik";
 import Layouts from "../../components/Layouts";
 
-import IncomeContext from "../../context/IncomeContext";
+import ExpenditureContext from "../../context/ExpenditureContext";
 
-const EditIncomePages = () => {
-  const { incomeID, setIdIncome, getIdIncome, UpdateIncome } =
-    useContext(IncomeContext);
+const EditExpenturePages = () => {
+  const { expentureID, setIdExpenture, getIdExpenture, UpdateExpenture } =
+    useContext(ExpenditureContext);
   const { id } = useParams();
 
   useEffect(() => {
-    getIdIncome(id);
+    getIdExpenture(id);
   }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setIdIncome({ ...incomeID, [name]: value });
+    setIdExpenture({ ...expentureID, [name]: value });
   };
 
-  const EditInCome = () => {
-    //  e.preventDefault();
-    UpdateIncome(id, incomeID);
+  const EditExpeneure = (event) => {
+    UpdateExpenture(id, expentureID);
   };
 
   return (
     <>
-      <Layouts title="Edit_Income">
+      <Layouts title="Edit_Expenditure">
         <div className="p-4 sm:ml-64 bg-gray-200">
           <div className="p-6  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-16">
             <Card className="mt-6 w-80">
@@ -42,39 +41,39 @@ const EditIncomePages = () => {
                 <form className="space-y-6">
                   <div className="flex flex-col gap-4">
                     <Input
-                      name="date_of_entry"
+                      name="out_date"
                       type="date"
-                      label="Tanggal Pemasukan"
+                      label="Tanggal Pengeluaran"
                       onChange={handleChange}
                       // onBlur={handleBlur}
-                      value={incomeID?.date_of_entry}
+                      value={expentureID?.out_date}
                     />
                     <Input
-                      name="income_statement"
-                      label="Keterangan Pemasukan"
+                      name="expenditure_statement"
+                      label="Keterangan Pengeluaran"
                       onChange={handleChange}
                       // onBlur={handleBlur}
-                      value={incomeID?.income_statement}
+                      value={expentureID?.expenditure_statement}
                     />
                     <Input
-                      name="source_of_income"
-                      label="Sumber Pemasukan"
+                      name="source_expenditure"
+                      label="Sumber Pengeluaran"
                       onChange={handleChange}
                       // onBlur={handleBlur}
-                      value={incomeID?.source_of_income}
+                      value={expentureID?.source_expenditure}
                     />
                     <Input
-                      name="income_amount"
+                      name="expenditure_amount"
                       type="number"
-                      label="Jumlah Pemasukan"
+                      label="Jumlah Pengeluaran"
                       onChange={handleChange}
                       // onBlur={handleBlur}
-                      value={incomeID?.income_amount}
+                      value={expentureID?.expenditure_amount}
                     />
                   </div>
 
                   <Button
-                    onClick={() => EditInCome()}
+                    onClick={() => EditExpeneure()}
                     className="mt-6"
                     fullWidth
                   >
@@ -90,4 +89,4 @@ const EditIncomePages = () => {
   );
 };
 
-export default EditIncomePages;
+export default EditExpenturePages;

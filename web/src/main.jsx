@@ -9,6 +9,7 @@ import { CheckUsersProvider } from "./context/UsersContext";
 
 import setupInterceptors from "./utils/setupInterceptor";
 import { IncomeProvider } from "./context/IncomeContext.jsx";
+import { ExpenditureProvider } from "./context/ExpenditureContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <CheckUsersProvider>
           <IncomeProvider>
-            <App />
+            <ExpenditureProvider>
+              <App />
+            </ExpenditureProvider>
           </IncomeProvider>
         </CheckUsersProvider>
       </AuthProvider>

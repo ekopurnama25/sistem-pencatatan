@@ -11,43 +11,44 @@ import { useNavigate } from "react-router-dom";
 import Layouts from "../../components/Layouts";
 import { Formik } from "formik";
 
-import IncomeContext from "../../context/IncomeContext";
-const AddIncomePages = () => {
+import ExpenditureContext from "../../context/ExpenditureContext";
+const AddExpenditurePages = () => {
   let navigate = useNavigate();
-  const { AddIncome } = useContext(IncomeContext);
+  const { AddExpenditure } = useContext(ExpenditureContext);
   return (
     <>
-      <Layouts title="Add_income">
+      <Layouts title="Add_Expenditure">
         <div className="p-4 sm:ml-64 bg-gray-300">
           <div className="p-6  border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-16">
             <Card className="mt-6 w-80">
               <CardBody>
                 <Formik
                   initialValues={{
-                    date_of_entry: "",
-                    income_statement: "",
-                    source_of_income: "",
-                    income_amount: "",
+                    out_date: "",
+                    expenditure_statement: "",
+                    source_expenditure: "",
+                    expenditure_amount: "",
                   }}
                   validate={(values) => {
                     const errors = {};
-                    if (!values.date_of_entry) {
-                      errors.date_of_entry = "date cannot be empty";
-                    } else if (!values.income_statement) {
-                      errors.income_statement =
+                    if (!values.out_date) {
+                      errors.out_date = "date cannot be empty";
+                    } else if (!values.expenditure_statement) {
+                      errors.expenditure_statement =
                         "keterangan pemasukan cannot be empty";
-                    } else if (!values.source_of_income) {
-                      errors.source_of_income =
+                    } else if (!values.source_expenditure) {
+                      errors.source_expenditure =
                         "sumber pendapatan cannot be empty";
-                    } else if (!values.income_amount) {
-                      errors.income_amount = "total pendapatan cannot be empty";
+                    } else if (!values.expenditure_amount) {
+                      errors.expenditure_amount =
+                        "total pendapatan cannot be empty";
                     }
                     return errors;
                   }}
-                  onSubmit={(income) => {
-                    const addIncome = AddIncome(income);
-                    if (addIncome) {
-                      navigate("/income");
+                  onSubmit={(expenditure) => {
+                    const addexpenditure = AddExpenditure(expenditure);
+                    if (addexpenditure) {
+                      navigate("/expenditure");
                     }
                   }}
                 >
@@ -64,54 +65,54 @@ const AddIncomePages = () => {
                     <form className="space-y-6" onSubmit={handleSubmit}>
                       <div className="flex flex-col gap-4">
                         <Input
-                          name="date_of_entry"
+                          name="out_date"
                           type="date"
-                          label="Tanggal Pemasukan"
+                          label="Tanggal Pengeluran"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.date_of_entry}
+                          value={values.out_date}
                         />
                         <Typography variant="small" color="red">
-                          {errors.date_of_entry &&
-                            touched.date_of_entry &&
-                            errors.date_of_entry}
+                          {errors.out_date &&
+                            touched.out_date &&
+                            errors.out_date}
                         </Typography>
                         <Input
-                          name="income_statement"
-                          label="Keterangan Pemasukan"
+                          name="expenditure_statement"
+                          label="Keterangan Pengeluaran"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.income_statement}
+                          value={values.expenditure_statement}
                         />
                         <Typography variant="small" color="red">
-                          {errors.income_statement &&
-                            touched.income_statement &&
-                            errors.income_statement}
+                          {errors.expenditure_statement &&
+                            touched.expenditure_statement &&
+                            errors.expenditure_statement}
                         </Typography>
                         <Input
-                          name="source_of_income"
-                          label="Sumber Pemasukan"
+                          name="source_expenditure"
+                          label="Sumber Pengeluaran"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.source_of_income}
+                          value={values.source_expenditure}
                         />
                         <Typography variant="small" color="red">
-                          {errors.source_of_income &&
-                            touched.source_of_income &&
-                            errors.source_of_income}
+                          {errors.source_expenditure &&
+                            touched.source_expenditure &&
+                            errors.source_expenditure}
                         </Typography>
                         <Input
-                          name="income_amount"
+                          name="expenditure_amount"
                           type="number"
-                          label="Jumlah Pemasukan"
+                          label="Jumlah Pengeluaran"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.income_amount}
+                          value={values.expenditure_amount}
                         />
                         <Typography variant="small" color="red">
-                          {errors.income_amount &&
-                            touched.income_amount &&
-                            errors.income_amount}
+                          {errors.expenditure_amount &&
+                            touched.expenditure_amount &&
+                            errors.expenditure_amount}
                         </Typography>
                       </div>
 
@@ -135,4 +136,4 @@ const AddIncomePages = () => {
   );
 };
 
-export default AddIncomePages;
+export default AddExpenditurePages;

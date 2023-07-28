@@ -50,6 +50,22 @@ export const IncomeProvider = ({ children }) => {
     }
   };
 
+  const UpdateIncome = async (id, income) => {
+    try {
+      const req = await axiosInstance.put(`/income/${id}`, {
+        date_of_entry: income.date_of_entry,
+        income_statement: income.income_statement,
+        source_of_income: income.source_of_income,
+        income_amount: income.income_amount,
+      });
+      console.log(req);
+      //const { data } = req;
+      return req.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let contextDataIncome = {
     income: income,
     incomeID: incomeID,
@@ -59,6 +75,7 @@ export const IncomeProvider = ({ children }) => {
     AddIncome,
     DeleteIncome,
     getIdIncome,
+    UpdateIncome,
   };
 
   return (
