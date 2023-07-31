@@ -53,7 +53,7 @@ export const ExpenditureProvider = ({ children }) => {
 
   const UpdateExpenture = async (id, expenture) => {
     try {
-      const req = await axiosInstance.put(`/expenture/${id}`, {
+      const req = await axiosInstance.put(`/expenditure/${id}`, {
         out_date: expenture.out_date,
         expenditure_statement: expenture.expenditure_statement,
         source_expenditure: expenture.source_expenditure,

@@ -76,7 +76,7 @@ const routes = [
     ),
   },
   {
-    path: "/updateExpenture/:id",
+    path: "/updateexpenture/:id",
     element: (
       <PrivateRoute allowRoles={[Roles.Admin]}>
         <CheckUsersRouter>

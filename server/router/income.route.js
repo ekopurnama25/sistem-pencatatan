@@ -6,6 +6,8 @@ const incomeService = require("../service/incomeService");
 
 router.get("/", authorization.verify, incomeService.getIncome);
 
+router.get("/totalincome", authorization.verify, incomeService.getTotalIncome);
+
 router.post("/", authorization.verify, incomeService.postIncome);
 
 router.delete("/:id", authorization.verify, incomeService.deleteIncome);

@@ -90,3 +90,20 @@ exports.updateIncome = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.getTotalIncome = async (req, res) => {
+  try {
+    const IncomeData = await Income.findAll({
+      attributes: [
+        [
+          Income.sequelize.fn("sum", Income.sequelize.col("income_amount")),
+          "minPrice",
+        ],
+      ],
+      raw: true,
+    });
+    res.status(200).json({ message: "true", data: IncomeData });
+  } catch (error) {
+    console.log(error);
+  }
+};

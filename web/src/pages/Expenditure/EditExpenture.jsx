@@ -27,7 +27,7 @@ const EditExpenturePages = () => {
     setIdExpenture({ ...expentureID, [name]: value });
   };
 
-  const EditExpeneure = (event) => {
+  const EditExpeneure = () => {
     UpdateExpenture(id, expentureID);
   };
 

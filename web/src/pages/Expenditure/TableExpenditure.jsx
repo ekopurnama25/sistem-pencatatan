@@ -44,7 +44,7 @@ export default function TableExpenditure() {
   };
 
   const GetIDExpenture = async (id) => {
-    return navigate(`/updateExpenture/${id}`);
+    return navigate(`/updateexpenture/${id}`);
   };
 
   return (

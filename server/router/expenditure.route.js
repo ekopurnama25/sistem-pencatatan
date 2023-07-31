@@ -6,6 +6,12 @@ const ExpenditureService = require("../service/expenditureService");
 
 router.get("/", authorization.verify, ExpenditureService.getexpenditure);
 
+router.get(
+  "/totalexpenditure",
+  authorization.verify,
+  ExpenditureService.getTotalExpenditure
+);
+
 router.post("/", authorization.verify, ExpenditureService.postExpenditure);
 
 router.delete(

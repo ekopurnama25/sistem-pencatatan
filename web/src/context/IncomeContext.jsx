@@ -6,6 +6,7 @@ const IncomeContext = createContext({});
 export const IncomeProvider = ({ children }) => {
   const [income, setIncome] = useState([]);
   const [incomeID, setIdIncome] = useState();
+  const [sumincome, setSumIncome] = useState();
 
   const getAllIncome = async () => {
     try {
@@ -66,9 +67,23 @@ export const IncomeProvider = ({ children }) => {
     }
   };
 
+  const SumIncome = async () => {
+    try {
+      const req = await axiosInstance.get("/income/totalincome");
+      console.log(req.data.data);
+      //const { data } = req;
+      setSumIncome(req.data.data);
+      return req.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let contextDataIncome = {
     income: income,
     incomeID: incomeID,
+    sumincome: sumincome,
+    setSumIncome: setSumIncome,
     setIncome: setIncome,
     setIdIncome: setIdIncome,
     getAllIncome,
@@ -76,6 +91,7 @@ export const IncomeProvider = ({ children }) => {
     DeleteIncome,
     getIdIncome,
     UpdateIncome,
+    SumIncome,
   };
 
   return (

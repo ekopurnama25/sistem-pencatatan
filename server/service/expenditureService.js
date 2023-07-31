@@ -90,3 +90,23 @@ exports.updateExpenditure = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.getTotalExpenditure = async (req, res) => {
+  try {
+    const ExpenditureTotal = await Expenditure.findAll({
+      attributes: [
+        [
+          Expenditure.sequelize.fn(
+            "sum",
+            Expenditure.sequelize.col("expenditure_amount")
+          ),
+          "TotalExpenditure",
+        ],
+      ],
+      raw: true,
+    });
+    res.status(200).json({ message: "true", data: ExpenditureTotal });
+  } catch (error) {
+    console.log(error);
+  }
+};
