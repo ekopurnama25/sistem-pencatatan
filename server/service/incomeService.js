@@ -1,4 +1,4 @@
-const { Income } = require("../models");
+const { Income, Expenditure } = require("../models");
 
 exports.getIncome = async (req, res) => {
   try {
@@ -103,6 +103,39 @@ exports.getTotalIncome = async (req, res) => {
       raw: true,
     });
     res.status(200).json({ message: "true", data: IncomeData });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.getSisaKas = async (req, res) => {
+  try {
+    const IncomeData = await Income.findAll({
+      attributes: [
+        [
+          Income.sequelize.fn("sum", Income.sequelize.col("income_amount")),
+          "minPrice",
+        ],
+      ],
+      raw: true,
+    });
+
+    const ExpenditureTotal = await Expenditure.findAll({
+      attributes: [
+        [
+          Expenditure.sequelize.fn(
+            "sum",
+            Expenditure.sequelize.col("expenditure_amount")
+          ),
+          "TotalExpenditure",
+        ],
+      ],
+      raw: true,
+    });
+
+    let sisa = IncomeData[0]?.minPrice - ExpenditureTotal[0]?.TotalExpenditure;
+    console.log(sisa);
+    res.status(200).json({ message: "true", data: sisa });
   } catch (error) {
     console.log(error);
   }

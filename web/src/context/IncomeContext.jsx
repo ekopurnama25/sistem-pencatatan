@@ -7,6 +7,7 @@ export const IncomeProvider = ({ children }) => {
   const [income, setIncome] = useState([]);
   const [incomeID, setIdIncome] = useState();
   const [sumincome, setSumIncome] = useState();
+  const [resultkas, setResultKas] = useState();
 
   const getAllIncome = async () => {
     try {
@@ -79,19 +80,34 @@ export const IncomeProvider = ({ children }) => {
     }
   };
 
+  const ResultKas = async () => {
+    try {
+      const req = await axiosInstance.get("/income/sisakas");
+      console.log(req);
+      //const { data } = req;
+      setResultKas(req.data);
+      return req.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let contextDataIncome = {
     income: income,
     incomeID: incomeID,
     sumincome: sumincome,
+    resultkas: resultkas,
     setSumIncome: setSumIncome,
     setIncome: setIncome,
     setIdIncome: setIdIncome,
+    setResultKas: setResultKas,
     getAllIncome,
     AddIncome,
     DeleteIncome,
     getIdIncome,
     UpdateIncome,
     SumIncome,
+    ResultKas,
   };
 
   return (

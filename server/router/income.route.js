@@ -8,6 +8,8 @@ router.get("/", authorization.verify, incomeService.getIncome);
 
 router.get("/totalincome", authorization.verify, incomeService.getTotalIncome);
 
+router.get("/sisakas", authorization.verify, incomeService.getSisaKas);
+
 router.post("/", authorization.verify, incomeService.postIncome);
 
 router.delete("/:id", authorization.verify, incomeService.deleteIncome);

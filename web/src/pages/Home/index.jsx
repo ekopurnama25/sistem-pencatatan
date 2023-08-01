@@ -10,8 +10,13 @@ import {
 } from "@material-tailwind/react";
 
 import IncomeContext from "../../context/IncomeContext";
+
+import ExpenditureContext from "../../context/ExpenditureContext";
+
 const HomePages = () => {
-  const { SumIncome, sumincome } = useContext(IncomeContext);
+  const { SumIncome, sumincome, resultkas, ResultKas } =
+    useContext(IncomeContext);
+  const { SumExpenditure, sumexpenture } = useContext(ExpenditureContext);
 
   useEffect(() => {
     const getSumIncome = async () => {
@@ -22,11 +27,24 @@ const HomePages = () => {
     getSumIncome();
   }, []);
 
-  const numberFormat = (value) =>
-    new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-    }).format(value);
+  useEffect(() => {
+    const getSumExpenditure = async () => {
+      await SumExpenditure();
+      //setIncome(GETALLINCOME);
+    };
+
+    getSumExpenditure();
+  }, []);
+
+  useEffect(() => {
+    const getResultKas = async () => {
+      await ResultKas();
+      //setIncome(GETALLINCOME);
+    };
+
+    getResultKas();
+  }, []);
+
   return (
     <>
       <Layouts title="Home">
@@ -53,16 +71,29 @@ const HomePages = () => {
             </Card>
             <Card className="mt-1 w-full">
               <CardBody>
-                <h1>
-                  <b>Pengeluaran :</b>
-                </h1>
+                <div className="flex gap-10">
+                  <Typography variant="h5" color="red">
+                    Pengeluaran :
+                  </Typography>
+                  {sumexpenture &&
+                    sumexpenture.map((sumExpenture, index) => {
+                      return (
+                        <div key={index}>
+                          <Typography variant="h5" color="red">
+                            Rp.{" "}
+                            {sumExpenture?.TotalExpenditure.toLocaleString()}
+                          </Typography>
+                        </div>
+                      );
+                    })}
+                </div>
               </CardBody>
             </Card>
             <Card className="mt-1 w-full">
               <CardBody>
-                <h1>
-                  <b>Sisa Kas :</b>
-                </h1>
+                <Typography variant="h5" color="blue">
+                  Total Kas : Rp. {resultkas?.data.toLocaleString()}
+                </Typography>
               </CardBody>
             </Card>
           </div>

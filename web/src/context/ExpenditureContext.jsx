@@ -6,6 +6,7 @@ const ExpenditureContext = createContext({});
 export const ExpenditureProvider = ({ children }) => {
   const [expenditure, setExpenditure] = useState([]);
   const [expentureID, setIdExpenture] = useState();
+  const [sumexpenture, setSumExpenture] = useState();
 
   const getAllExpenditure = async () => {
     try {
@@ -67,9 +68,23 @@ export const ExpenditureProvider = ({ children }) => {
     }
   };
 
+  const SumExpenditure = async () => {
+    try {
+      const req = await axiosInstance.get("/expenditure/totalexpenditure");
+      console.log(req);
+      //const { data } = req;
+      setSumExpenture(req.data.data);
+      return req.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   let contextDataExpenditure = {
     expenditure: expenditure,
     expentureID: expentureID,
+    sumexpenture: sumexpenture,
+    setSumExpenture: setSumExpenture,
     setIdExpenture: setIdExpenture,
     setExpenditure: setExpenditure,
     AddExpenditure,
@@ -77,6 +92,7 @@ export const ExpenditureProvider = ({ children }) => {
     DeleteDataExpenture,
     getIdExpenture,
     UpdateExpenture,
+    SumExpenditure,
   };
 
   return (
