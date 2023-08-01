@@ -12,6 +12,7 @@ import {
 import IncomeContext from "../../context/IncomeContext";
 
 import ExpenditureContext from "../../context/ExpenditureContext";
+import ChartDataHome from "./ChartHome";
 
 const HomePages = () => {
   const { SumIncome, sumincome, resultkas, ResultKas } =
@@ -100,7 +101,12 @@ const HomePages = () => {
           <div className="flex gap-10 p-1 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ">
             <Card className="mt-1 w-full">
               <CardBody>
-                <h1>HALLO</h1>
+                <div style={{ textAlign: "center" }}>
+                  <Typography variant="h5" color="blue">
+                    DATA PENINGKATAN PEMASUKAN SETIAP TAHUN
+                  </Typography>
+                </div>
+                <ChartDataHome />
               </CardBody>
             </Card>
           </div>
