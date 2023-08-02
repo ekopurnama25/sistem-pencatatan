@@ -12,8 +12,8 @@ export const ExpenditureProvider = ({ children }) => {
     try {
       const Expent = await axiosInstance.get("/expenditure/");
       //console.log(Income);
-      setExpenditure(Expent);
-      return Expent;
+      setExpenditure(Expent?.data?.data);
+      return Expent.data.data;
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +27,13 @@ export const ExpenditureProvider = ({ children }) => {
         source_expenditure: expenture.source_expenditure,
         expenditure_amount: expenture.expenditure_amount,
       });
-      return incomeCreate;
+      // const arr1 = [incomeCreate];
+      // const arr2 = [incomeCreate?.data.data];
+      // const result = incomeCreate.concat(incomeCreate?.data?.data);
+      // setExpenditure(incomeCreate?.data?.data);
+      //console.log(result);
+      //console.log("create", [...incomeCreate]);
+      return incomeCreate?.data?.data;
     } catch (error) {
       console.log(error);
     }

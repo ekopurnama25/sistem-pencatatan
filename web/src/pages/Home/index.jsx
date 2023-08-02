@@ -81,8 +81,10 @@ const HomePages = () => {
                       return (
                         <div key={index}>
                           <Typography variant="h5" color="red">
-                            Rp.{" "}
-                            {sumExpenture?.TotalExpenditure.toLocaleString()}
+                            Rp.
+                            {sumExpenture?.TotalExpenditure
+                              ? sumExpenture?.TotalExpenditure.toLocaleString()
+                              : 0}
                           </Typography>
                         </div>
                       );

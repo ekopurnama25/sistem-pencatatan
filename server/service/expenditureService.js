@@ -60,12 +60,14 @@ exports.postExpenditure = async (req, res) => {
 exports.deleteExpenditure = async (req, res) => {
   try {
     const id = req.params.id;
-    await Expenditure.destroy({
+    const deleteExpenditure = await Expenditure.destroy({
       where: { id_expenditure: id },
     });
-    res
-      .status(200)
-      .json({ status: 200, message: "success delete data, " + id });
+    res.status(200).json({
+      status: 200,
+      message: "success delete data",
+      id: id,
+    });
   } catch (error) {
     console.log(error);
   }

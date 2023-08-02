@@ -23,8 +23,12 @@ const TABLE_HEAD = [
 
 export default function TableExpenditure() {
   let navigate = useNavigate();
-  const { expenditure, getAllExpenditure, DeleteDataExpenture } =
-    useContext(ExpenditureContext);
+  const {
+    expenditure,
+    setExpenditure,
+    getAllExpenditure,
+    DeleteDataExpenture,
+  } = useContext(ExpenditureContext);
 
   useEffect(() => {
     const getExpenditure = async () => {
@@ -40,7 +44,19 @@ export default function TableExpenditure() {
   };
 
   const DeleteExpenture = async (id) => {
-    await DeleteDataExpenture(id);
+    try {
+      const Expditu = await DeleteDataExpenture(id);
+      console.log(expenditure);
+      if (Expditu) {
+        const deleteExpenditure = expenditure.filter((x) => {
+          return x.id_expenditure !== id;
+        });
+        console.log("hallo", deleteExpenditure);
+        setExpenditure(deleteExpenditure);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const GetIDExpenture = async (id) => {
@@ -93,7 +109,7 @@ export default function TableExpenditure() {
           </thead>
           <tbody>
             {expenditure &&
-              expenditure?.data?.data?.map((Expenditure, index) => {
+              expenditure?.map((Expenditure, index) => {
                 const isLast = index + 1;
                 const classes = isLast
                   ? "p-4"
@@ -159,7 +175,7 @@ export default function TableExpenditure() {
                           }
                         >
                           Edit
-                        </Button>
+                        </Button>{" "}
                         <Button
                           size="md"
                           color="red"
