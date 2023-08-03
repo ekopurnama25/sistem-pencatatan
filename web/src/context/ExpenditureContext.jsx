@@ -32,8 +32,8 @@ export const ExpenditureProvider = ({ children }) => {
       // const result = incomeCreate.concat(incomeCreate?.data?.data);
       // setExpenditure(incomeCreate?.data?.data);
       //console.log(result);
-      //console.log("create", [...incomeCreate]);
-      return incomeCreate?.data?.data;
+      console.log("create", Array.prototype.concat(incomeCreate?.data?.data));
+      return Array.prototype.concat(incomeCreate?.data?.data);
     } catch (error) {
       console.log(error);
     }

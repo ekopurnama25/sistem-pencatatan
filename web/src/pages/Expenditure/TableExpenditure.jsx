@@ -33,7 +33,8 @@ export default function TableExpenditure() {
   useEffect(() => {
     const getExpenditure = async () => {
       await getAllExpenditure();
-      //setIncome(GETALLINCOME);
+      // console.log(res);
+      // setExpenditure(res);
     };
 
     getExpenditure();
