@@ -43,7 +43,10 @@ export default function ChartDataHome() {
   const options = {};
   return (
     <>
-      <Line style={{ padding: 10, width: 20, height: 800 }} data={chartData} />
+      <Line
+        style={{ padding: "20px", widht: "100", height: "50%" }}
+        data={chartData}
+      />
     </>
   );
 }

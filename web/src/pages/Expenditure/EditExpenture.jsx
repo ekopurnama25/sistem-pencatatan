@@ -7,13 +7,15 @@ import {
   Input,
   Checkbox,
 } from "@material-tailwind/react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import { Formik } from "formik";
 import Layouts from "../../components/Layouts";
 
 import ExpenditureContext from "../../context/ExpenditureContext";
 
 const EditExpenturePages = () => {
+  let navigate = useNavigate();
   const { expentureID, setIdExpenture, getIdExpenture, UpdateExpenture } =
     useContext(ExpenditureContext);
   const { id } = useParams();
@@ -28,7 +30,10 @@ const EditExpenturePages = () => {
   };
 
   const EditExpeneure = () => {
-    UpdateExpenture(id, expentureID);
+    const updateExp = UpdateExpenture(id, expentureID);
+    if (updateExp) {
+      navigate("/expenditure");
+    }
   };
 
   return (

@@ -7,13 +7,14 @@ import {
   Input,
   Checkbox,
 } from "@material-tailwind/react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import Layouts from "../../components/Layouts";
 
 import IncomeContext from "../../context/IncomeContext";
 
 const EditIncomePages = () => {
+  let navigate = useNavigate();
   const { incomeID, setIdIncome, getIdIncome, UpdateIncome } =
     useContext(IncomeContext);
   const { id } = useParams();
@@ -29,7 +30,10 @@ const EditIncomePages = () => {
 
   const EditInCome = () => {
     //  e.preventDefault();
-    UpdateIncome(id, incomeID);
+    const updateINC = UpdateIncome(id, incomeID);
+    if (updateINC) {
+      navigate("/income");
+    }
   };
 
   return (

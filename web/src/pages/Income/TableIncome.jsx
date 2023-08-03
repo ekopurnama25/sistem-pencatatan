@@ -23,12 +23,14 @@ const TABLE_HEAD = [
 
 export default function TableIncome() {
   let navigate = useNavigate();
-  const { income, getAllIncome, DeleteIncome } = useContext(IncomeContext);
+  const { income, setIncome, getAllIncome, DeleteIncome } =
+    useContext(IncomeContext);
 
   useEffect(() => {
     const getIncome = async () => {
-      await getAllIncome();
-      //setIncome(GETALLINCOME);
+      const res = await getAllIncome();
+      console.log(res);
+      setIncome(res);
     };
 
     getIncome();
@@ -39,7 +41,15 @@ export default function TableIncome() {
   };
 
   const Delete_Income = async (id) => {
-    await DeleteIncome(id);
+    const incomedel = await DeleteIncome(id);
+    console.log(incomedel);
+    if (incomedel) {
+      const deleteINC = income.filter((x) => {
+        return x.id_income !== id;
+      });
+      console.log("hallo", deleteINC);
+      setIncome(deleteINC);
+    }
   };
 
   const GetIDIncome = async (id) => {
@@ -92,7 +102,7 @@ export default function TableIncome() {
           </thead>
           <tbody>
             {income &&
-              income?.data?.data?.map((Income, index) => {
+              income?.map((Income, index) => {
                 const isLast = index + 1;
                 const classes = isLast
                   ? "p-4"

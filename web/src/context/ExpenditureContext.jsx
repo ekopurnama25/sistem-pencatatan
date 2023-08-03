@@ -11,8 +11,6 @@ export const ExpenditureProvider = ({ children }) => {
   const getAllExpenditure = async () => {
     try {
       const Expent = await axiosInstance.get("/expenditure/");
-      //console.log(Income);
-      setExpenditure(Expent?.data?.data);
       return Expent.data.data;
     } catch (error) {
       console.log(error);
@@ -21,19 +19,13 @@ export const ExpenditureProvider = ({ children }) => {
 
   const AddExpenditure = async (expenture) => {
     try {
-      const incomeCreate = await axiosInstance.post("/expenditure/", {
+      const Createdata = await axiosInstance.post("/expenditure/", {
         out_date: expenture.out_date,
         expenditure_statement: expenture.expenditure_statement,
         source_expenditure: expenture.source_expenditure,
         expenditure_amount: expenture.expenditure_amount,
       });
-      // const arr1 = [incomeCreate];
-      // const arr2 = [incomeCreate?.data.data];
-      // const result = incomeCreate.concat(incomeCreate?.data?.data);
-      // setExpenditure(incomeCreate?.data?.data);
-      //console.log(result);
-      console.log("create", Array.prototype.concat(incomeCreate?.data?.data));
-      return Array.prototype.concat(incomeCreate?.data?.data);
+      return [Createdata.data.data];
     } catch (error) {
       console.log(error);
     }
@@ -67,6 +59,9 @@ export const ExpenditureProvider = ({ children }) => {
         expenditure_amount: expenture.expenditure_amount,
       });
       console.log(req);
+      if (req) {
+        req.id_expenditure === id;
+      }
       //const { data } = req;
       return req.data;
     } catch (error) {

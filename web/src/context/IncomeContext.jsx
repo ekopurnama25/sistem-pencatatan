@@ -13,8 +13,7 @@ export const IncomeProvider = ({ children }) => {
     try {
       const Income = await axiosInstance.get("/income/");
       //console.log(Income);
-      setIncome(Income);
-      return Income;
+      return Income.data.data;
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +27,7 @@ export const IncomeProvider = ({ children }) => {
         source_of_income: income.source_of_income,
         income_amount: income.income_amount,
       });
-      return incomeCreate;
+      return [incomeCreate.data.data];
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +60,9 @@ export const IncomeProvider = ({ children }) => {
         income_amount: income.income_amount,
       });
       console.log(req);
-      //const { data } = req;
+      if (req) {
+        req.id_income === id;
+      }
       return req.data;
     } catch (error) {
       console.log(error);
