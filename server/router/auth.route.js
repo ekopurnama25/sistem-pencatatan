@@ -21,6 +21,8 @@ router.post("/", authService.authUsers);
 
 router.post("/home", authorization.verify, homeService.home);
 
+router.post("/logout", authorization.verify, authService.Logout);
+
 router.post("/refresh_token", authService.refreshToken);
 
 module.exports = router;

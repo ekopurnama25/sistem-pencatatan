@@ -105,7 +105,7 @@ const HomePages = () => {
               <CardBody>
                 <div style={{ textAlign: "center" }}>
                   <Typography variant="h5" color="blue">
-                    DATA PENINGKATAN PEMASUKAN SETIAP TAHUN
+                    DATA PEMASUKAN SETIAP HARI
                   </Typography>
                 </div>
                 <ChartDataHome />

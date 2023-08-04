@@ -98,3 +98,26 @@ exports.refreshToken = async (req, res) => {
     console.log(e);
   }
 };
+
+exports.Logout = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  console.log(refreshToken);
+  if (!refreshToken) return res.sendStatus(204);
+  const user = await Token.findAll({
+    where: {
+      refresh_token: refreshToken,
+    },
+  });
+  if (!user[0]) return res.sendStatus(204);
+  const userId = user[0].id;
+  await Token.update(
+    { refresh_token: null },
+    {
+      where: {
+        id: userId,
+      },
+    }
+  );
+  res.clearCookie("refreshToken");
+  return res.sendStatus(200);
+};

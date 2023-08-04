@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import {
   Chart as ChartJS,
@@ -10,32 +10,51 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
+import IncomeContext from "../../context/IncomeContext";
 ChartJS.register(LineElement, CategoryScale, PointElement, LinearScale, Title);
 
 export default function ChartDataHome() {
+  const { income, setIncome, getAllIncome, DeleteIncome } =
+    useContext(IncomeContext);
+
+  useEffect(() => {
+    const getIncome = async () => {
+      const res = await getAllIncome();
+      console.log(res);
+      setIncome(res);
+    };
+
+    getIncome();
+  }, []);
+  console.log(income?.map((i) => i?.date_of_entry));
+
+  // const mapIncome =
+  //   income &&
+  //   income.map((value, i) => {
+  //     return (
+  //       <>
+  //         <div key={i}></div>
+  //         <div>{value?.income_amount}</div>
+  //       </>
+  //     );
+  //   });
+  const datas = [];
+
+  // const map = income.map((x) => {
+  //   return x.income_amount;
+  // });
+
+  console.log("in");
   const chartData = {
-    labels: [
-      "Januari",
-      "Febuari",
-      "Maret",
-      "April",
-      "Mei",
-      "Juni",
-      "Juli",
-      "Agustus",
-      "September",
-      "Oktober",
-      "November",
-      "Desember",
-    ],
+    labels: income?.map((i) => i?.date_of_entry),
 
     datasets: [
       {
-        label: "369",
-        data: [3, 2, 9],
+        label: income?.map((i) => i?.date_of_entry),
+        data: income?.map((i) => i?.income_amount),
         backgroundColor: "aqua",
         borderColor: "black",
-        borderWidth: 1,
+        borderWidth: 2,
       },
     ],
   };
