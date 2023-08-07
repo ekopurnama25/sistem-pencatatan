@@ -99,25 +99,26 @@ exports.refreshToken = async (req, res) => {
   }
 };
 
-exports.Logout = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
+exports.Logout = async (req, res, next) => {
+  const refreshToken = req.user;
+  console.log("user", req.user);
   console.log(refreshToken);
   if (!refreshToken) return res.sendStatus(204);
-  const user = await Token.findAll({
+  const user = await Token.findOne({
     where: {
-      refresh_token: refreshToken,
+      id_users: refreshToken,
     },
   });
-  if (!user[0]) return res.sendStatus(204);
-  const userId = user[0].id;
+  if (!user) return res.sendStatus(204);
+  const userId = user.id_users;
+  console.log(userId, "hallo");
   await Token.update(
-    { refresh_token: null },
+    { refreshToken: createRefreshToken(user.id_users) },
     {
       where: {
-        id: userId,
+        id_users: userId,
       },
     }
   );
-  res.clearCookie("refreshToken");
   return res.sendStatus(200);
 };

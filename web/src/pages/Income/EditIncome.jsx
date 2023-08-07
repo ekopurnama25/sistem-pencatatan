@@ -88,6 +88,13 @@ const EditIncomePages = () => {
               </CardBody>
             </Card>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
       </Layouts>
     </>

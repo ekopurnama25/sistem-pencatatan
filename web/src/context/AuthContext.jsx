@@ -28,9 +28,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    // Perform logout logic, e.g., making an API request
-    setAuthenticated(false);
+  const logout = async () => {
+    try {
+      const req = await axiosInstance.post("/auth/logout/");
+      if (req) {
+        const clearLocalStorage = localStorage.clear("Token");
+        setAuthenticated(clearLocalStorage);
+        return req;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   let contextData = {
